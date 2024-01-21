@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MovieStoreMvc.Models.Domain.Genre>
+@{
+}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-image: url('/images/last.jpg');
+        background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
+        background-repeat: no-repeat; /* Empêche la répétition de l'image */
+        margin: 0;
+        color: white;
+    }
+
+    .row {
+        color: white;
+    }
+
+    .even-row {
+        background-color: rgba(0, 0, 0, 0.1); /* Couleur de fond pour les lignes paires */
+    }
+
+    .odd-row {
+        background-color: rgba(255, 255, 255,0.5); /* Couleur de fond pour les lignes impaires */
+    }
+
+        /* Vous pouvez également personnaliser la couleur du texte pour chaque ligne si nécessaire */
+        .even-row td, .odd-row td {
+            color: black; /* Couleur du texte pour toutes les lignes */
+        }
+</style>
+<div class="tbl-container">
+    <h2 class="row">Genres</h2>
+
+    <table>
+        <tr class="row">
+            <th>Nom</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in Model.Select((value, index) => new { Value = value, Index = index }))
+        {
+            <tr class="@(item.Index % 2 == 0 ? "even-row" : "odd-row")">
+                <td>@item.Value.GenreName</td>
+                <td>
+                    <a href="/Genre/Edit?id=@item.Value.Id" class="btn btn-default"><i class="fa fa-edit"></i></a>
+                    <a onclick="return window.confirm('Are you sure?')" href="/Genre/Delete?id=@item.Value.Id" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="input-container">
+        <a href="/Genre/Add" class="btn btn-sec">Annuler</a>
+    </div>
+</div>

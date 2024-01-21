@@ -1,0 +1,105 @@
+﻿@model MovieStoreMvc.Models.Domain.Genre
+@{
+}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-image: url('/images/last.jpg');
+        background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
+        background-repeat: no-repeat; /* Empêche la répétition de l'image */
+        margin: 0;
+    }
+
+    form {
+        background-color: rgba(255, 255, 255,0.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        text-align: center;
+    }
+
+    h2 {
+        color: #333333;
+    }
+
+    .input-container {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333333;
+    }
+
+    .input {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .message-box {
+        color: #cc0000;
+        font-size: 12px;
+        margin-left: 10%;
+        text-align: left;
+    }
+
+    .alert {
+        background-color: #28a745;
+        color: #ffffff;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 14px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #007bff;
+        color: #ffffff;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<form class="w-40" asp-action="Add" method="post">
+    <h2 class="pb-10">Ajouter Genre</h2>
+    <div class="input-container">
+        <label asp-for="GenreName" class="w-40">Genre</label>
+        <input type="text" class="input" asp-for="GenreName">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="GenreName"> </span>
+    </div>
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert mb-1">
+            @TempData["msg"]
+        </div>
+    }
+
+    <div class="input-container">
+        <button class="btn btn-default" type="submit">Enregistrer</button>
+        <a class="btn btn-sec" href="/Genre/GenreList">Tous les enregistrements</a>
+    </div>
+</form>

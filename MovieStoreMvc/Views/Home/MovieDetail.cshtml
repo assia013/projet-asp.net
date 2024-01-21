@@ -1,0 +1,35 @@
+﻿@model MovieStoreMvc.Models.Domain.Movie
+@{
+}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-image: url('/images/last.jpg');
+        background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
+        background-repeat: no-repeat; /* Empêche la répétition de l'image */
+        margin: 0;
+        color: white;
+    }
+
+    .row {
+        color: white;
+        font-size: 20px;
+        font-family: 'textarea', sans-serif;
+    }
+</style>
+<div class="movie-detail w-80 m-auto">
+    <div class="img-container">
+        <img alt="image" src="/Uploads/@Model.MovieImage">
+    </div>
+
+    <div class="detail-container">
+        <h3 class="row">@Model.Title</h3>
+        <h4 class="row">@Model.GenreNames</h4>
+        <h4 class="row">@Model.ReleaseYear</h4>
+        <h4 class="row">Synopsis : @Model.Cast</h4>
+        <h4 class="row">Director : @Model.Director</h4>
+    </div>
+</div>
+<div class="w-80 m-auto">
+    <a href="/Home/Index" class="btn btn-default">Annuler</a>
+</div>

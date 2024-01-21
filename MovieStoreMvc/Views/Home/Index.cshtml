@@ -1,0 +1,70 @@
+﻿@model MovieStoreMvc.Models.DTO.MovieListVm
+@{
+    Layout = "_Layout";
+}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-image: url('/images/last.jpg');
+        background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
+        background-repeat: no-repeat; /* Empêche la répétition de l'image */
+        margin: 0;
+    }
+
+
+
+    .movie-card {
+        /* Styles pour chaque carte de film */
+        /* Assurez-vous d'ajuster ces styles en fonction de vos besoins spécifiques */
+        border: 1px solid #ccc;
+        margin: 10px;
+        padding: 10px;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.2); /* Arrière-plan transparent */
+        padding: 20px; /* Ajoutez une marge intérieure pour un meilleur espacement */
+    }
+
+    .row {
+        color: white;
+    }
+</style>
+<section class="search-bar">
+    <form method="get" asp-action="Index">
+        <input type="text" name="term" placeholder="Chercher ici">
+        <button type="submit"><i class="fa fa-search"></i></button>
+        <a class="btn btn-default" href="/Home/Index">Tous</a>
+    </form>
+</section>
+<section class="movies">
+    @foreach (var movie in Model.MovieList)
+    {
+        <div class="movie-card" onclick="window.location.href='/Home/MovieDetail?movieId=@movie.Id'">
+            <div class="movie-image">
+                <img src="/Uploads/@movie.MovieImage">
+            </div>
+            <div class="movie-info">
+                <h4 class="row">@movie.Title</h4>
+                <h4 class="row">@movie.GenreNames</h4>
+                <h4 class="row">@movie.ReleaseYear</h4>
+                @*<h4>Cast : @movie.Cast</h4>
+            <h4>Director : @movie.Director</h4>*@
+            </div>
+        </div>
+    }
+</section>
+
+<div class="pagination">
+    @for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        if (i == Model.CurrentPage)
+        {
+            <a href="/Home/Index?currentPage=@i&term=@Model.Term" class="active">@i</a>
+        }
+        else
+        {
+            <a href="/Home/Index?currentPage=@i&term=@Model.Term">@i</a>
+
+        }
+    }
+
+</div>

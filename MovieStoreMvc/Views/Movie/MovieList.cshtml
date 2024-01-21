@@ -1,0 +1,64 @@
+﻿@model MovieStoreMvc.Models.DTO.MovieListVm
+@{
+}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-image: url('/images/last.jpg');
+        background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
+        background-repeat: no-repeat; /* Empêche la répétition de l'image */
+        margin: 0;
+    }
+
+
+    .row {
+        color: white;
+    }
+
+    .even-row {
+        background-color: rgba(0, 0, 0, 0.1); /* Couleur de fond pour les lignes paires */
+    }
+
+    .odd-row {
+        background-color: rgba(255, 255, 255,0.5); /* Couleur de fond pour les lignes impaires */
+    }
+
+        /* Vous pouvez également personnaliser la couleur du texte pour chaque ligne si nécessaire */
+        .even-row td, .odd-row td {
+            color: black; /* Couleur du texte pour toutes les lignes */
+        }
+</style>
+<div class="tbl-container">
+    <h2 class="row">Movies</h2>
+
+    <table>
+        <tr class="row">
+            <th>Titre</th>
+            <th>Genre</th>
+            <th>Année de réalisation</th>
+            <th>Image</th>
+            <th>Synopsis</th>
+            <th>Directeur</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in Model.MovieList.Select((value, index) => new { Value = value, Index = index }))
+        {
+            <tr class="@(item.Index % 2 == 0 ? "even-row" : "odd-row")">
+                <td>@item.Value.Title</td>
+                <td>@item.Value.GenreNames</td>
+                <td>@item.Value.ReleaseYear</td>
+                <td><img style="height:60px;width:80px" src="/Uploads/@item.Value.MovieImage" /></td>
+                <td>@item.Value.Cast</td>
+                <td>@item.Value.Director</td>
+                <td>
+                    <a href="/Movie/Edit?id=@item.Value.Id" class="btn btn-default"><i class="fa fa-edit"></i></a>
+                    <a onclick="return window.confirm('Are you sure?')" href="/Movie/Delete?id=@item.Value.Id" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="input-container">
+        <a href="/Movie/Add" class="btn btn-sec">Annuler</a>
+    </div>
+</div>
